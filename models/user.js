@@ -77,6 +77,24 @@ module.exports = (sequelize) => {
     role: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true
+      }
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true
+      }
+    },
+    upload_files: {
+      type: DataTypes.TEXT,
+      allowNull: false
     }
   }, {
     sequelize,

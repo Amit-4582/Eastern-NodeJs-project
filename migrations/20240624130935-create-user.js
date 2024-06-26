@@ -38,6 +38,9 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      upload_files: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
