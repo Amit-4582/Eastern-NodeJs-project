@@ -3,8 +3,13 @@ const bcrypt = require('bcryptjs');
 
 const registerUser = async (req, res) => {
     try {
-        const { firstname, lastname, email, contact_number, postcode, password, hobbies, gender, role } = req.body;
+        const { firstname, lastname, email, contact_number, postcode, password, hobbies, gender, role, city, state } = req.body;
+
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Collect file names
+        const files = req.files ? req.files.map(file => file.filename) : [];
+
         const responseNewUserData = await User.create({
             firstname,
             lastname,
@@ -14,7 +19,10 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
             hobbies: hobbies.join(','),
             gender,
-            role
+            role,
+            city,
+            state,
+            upload_files: files.join(',')
         });
 
         res.status(201).json({ message: 'User registered successfully', data: responseNewUserData });
